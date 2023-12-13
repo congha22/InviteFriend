@@ -146,6 +146,9 @@ namespace InviteFriend
 
         private void GameLoop_UpdateTicked(object sender, UpdateTickedEventArgs e)
         {
+            if (!Config.EnableMod)
+                return;
+
             if (e.IsMultipleOf(6))
             {
                 PlayerChat playerChatInstance = new PlayerChat();

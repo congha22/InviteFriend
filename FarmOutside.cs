@@ -38,6 +38,8 @@ namespace InviteFriend
             if (!isFarm && !isFarmHouse)
                 return;
 
+            if (isFarmHouse && !ModEntry.Config.EnableVisitInside)      //If not enable visit inside
+                return;
 
             string name = null;
             Point door = new();

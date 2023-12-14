@@ -10,6 +10,7 @@ namespace InviteFriend
     {
         public bool EnableMod { get; set; } = true;
 
+        public bool EnableVisitInside { get; set; } = true;
         public float InviteComeTime { get; set; } = 1000;
         public float InviteLeaveTime { get; set; } = 2000;
 

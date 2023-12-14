@@ -72,9 +72,12 @@
 
   "foodstore.responselist.main": "Do you need anything else?",
   "foodstore.responselist.talk": "Talk",
-  "foodstore.responselist.invite": "Invite for a visit"
+  "foodstore.responselist.invite": "Invite for a visit",
 
 
+  // -------------- End of v1.0 -----------------
+
+  "foodstore.config.enablevisitinside": "Enable visitor inside Farm House?"
 
 
 

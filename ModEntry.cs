@@ -44,6 +44,7 @@ namespace InviteFriend
             if (!Config.EnableMod)
                 return;
             __instance.modData["hapyke.FoodStore/inviteTried"] = "false";
+            __instance.modData["hapyke.FoodStore/finishedDailyChat"] = "false";
         }
 
         private static void NPC_performTenMinuteUpdate_Postfix(NPC __instance)
@@ -177,13 +178,17 @@ namespace InviteFriend
                                         int randomIndex = random.Next(19);
                                         __instance.CurrentDialogue.Push(new Dialogue(SHelper.Translation.Get("foodstore.customerresponse." + randomIndex), __instance));
 
-                                        var formattedQuestion = string.Format(SHelper.Translation.Get("foodstore.responselist.main"), __instance);
-                                        var entryQuestion = new EntryQuestion(formattedQuestion, ResponseList, ActionList);
-                                        Game1.activeClickableMenu = entryQuestion;
+                                        if (__instance.modData["hapyke.FoodStore/finishedDailyChat"] == "true")
+                                        {
+                                            var formattedQuestion = string.Format(SHelper.Translation.Get("foodstore.responselist.main"), __instance);
+                                            var entryQuestion = new EntryQuestion(formattedQuestion, ResponseList, ActionList);
+                                            Game1.activeClickableMenu = entryQuestion;
 
-                                        var pc = new PlayerChat();
-                                        ActionList.Add(() => pc.OnPlayerSend(__instance, "hi"));
-                                        ActionList.Add(() => pc.OnPlayerSend(__instance, "invite"));
+                                            var pc = new PlayerChat();
+                                            ActionList.Add(() => pc.OnPlayerSend(__instance, "hi"));
+                                            ActionList.Add(() => pc.OnPlayerSend(__instance, "invite"));
+                                        }
+                                        __instance.modData["hapyke.FoodStore/finishedDailyChat"] = "true";
                                     }
                                 }
                                 catch (Exception ex) { }
@@ -240,7 +245,12 @@ namespace InviteFriend
             );
 
             //Villager invite
-
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => SHelper.Translation.Get("foodstore.config.enablevisitinside"),
+                getValue: () => Config.EnableVisitInside,
+                setValue: value => Config.EnableVisitInside = value
+            );
             configMenu.AddTextOption(
                 mod: ModManifest,
                 name: () => SHelper.Translation.Get("foodstore.config.invitecometime"),

@@ -13,6 +13,7 @@ namespace InviteFriend
         public bool EnableVisitInside { get; set; } = true;
         public float InviteComeTime { get; set; } = 1000;
         public float InviteLeaveTime { get; set; } = 2000;
+        public int DialogueTime { get; set; } = 2;
 
 
 
